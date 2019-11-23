@@ -1,0 +1,53 @@
+
+openapi: '3.0.0'
+
+info:
+  description: Share your DSLR camera images easily built in LauzHack'19
+  version: '1.0'
+  title: EasyCam API
+
+servers:
+  - url: https://api.easycam.asuarez.dev
+    description: Production endpoint.
+
+tags:
+  - name: image
+    description: endpoint for managing image stuff.
+
+paths:
+ /start:
+    post:
+      tags:
+        - control
+      summary: Start video to control person movements
+      description: Invoke this endpoint to start the gran hermano main feature
+      operationId: src.api.persontrack.start
+      responses:
+        200:
+          description: Standard GranHermano API JSON response. You should check the `error` attribute to determine if there was an error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIResponse'
+        default:
+          description: Unexpected error.
+          content:
+            application/text:
+              schema:
+                type: string
+                description: Error description. 
+
+components:
+  schemas:
+    APIResponse:
+      type: object
+      properties:
+        error:
+          type: boolean
+          description: Whether or not the request was successfully processed or not.
+        message:
+          type: string
+          description: Error message if the request was unsuccessful.
+        response:
+          type: object
+          description: Contains the response data if the request was successful.

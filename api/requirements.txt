@@ -1,0 +1,8 @@
+connexion[swagger-ui]
+Flask
+Flask-Cors
+uWSGI
+Cython
+numpy
+tensorflow
+opencv-python
