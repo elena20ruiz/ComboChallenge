@@ -15,7 +15,7 @@ tags:
     description: endpoint for managing image stuff.
 
 paths:
- /start:
+  /start:
     post:
       tags:
         - control
@@ -36,7 +36,27 @@ paths:
               schema:
                 type: string
                 description: Error description. 
-
+  /summary:
+    get:
+      tags:
+        - summary
+      summary: List the set of people that has coincided with others.
+      description: Invoke this endpoint to get information about all the people coincidences
+      operationId: src.api.summary.get
+      responses:
+        200:
+          description: Standard GranHermano API JSON response. You should check the `error` attribute to determine if there was an error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIResponse'
+        default:
+          description: Unexpected error.
+          content:
+            application/text:
+              schema:
+                type: string
+                description: Error description. 
 components:
   schemas:
     APIResponse:

@@ -1,5 +1,11 @@
 
+from src.helper import response
 
+def get():
+    # Read file
 
-def summary(person1):
-    return 
+    # Write app
+
+    # Return computed JSON
+    response = {}
+    return response.make(False, '', response)
