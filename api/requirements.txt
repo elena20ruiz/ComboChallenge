@@ -6,3 +6,5 @@ Cython
 numpy
 tensorflow
 opencv-python
+imutils
+expiringdict

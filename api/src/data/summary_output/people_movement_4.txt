@@ -1,0 +1,1 @@
+10:19:18 - Person 0 left the room after 1.593842 seconds.

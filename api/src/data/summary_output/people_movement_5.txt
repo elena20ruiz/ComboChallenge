@@ -1,0 +1,5 @@
+10:20:22 - Person 2 left the room after 1.509551 seconds.
+10:20:27 - Person 1 left the room after 1.514525 seconds.
+10:20:27 - Person 0 left the room after 1.503696 seconds.
+10:20:34 - Person 1 left the room after 1.50897 seconds.
+10:20:35 - Person 0 left the room after 1.511538 seconds.
