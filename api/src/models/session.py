@@ -27,6 +27,3 @@ class ControlTime():
         print(f'New status at {datetime.now().strftime("%H:%M:%S")}')
         for p in self.people:
             print(f'Person {p}: Time on room {self.people[p][0]}. Last update: {self.people[p][1].strftime("%H:%M:%S")}')
-
-
-CT = ControlTime()

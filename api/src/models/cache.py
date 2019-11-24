@@ -20,5 +20,3 @@ class ExpiringCache():
     def reset(self):
         self.cache = ExpiringDict(max_len=50, max_age_seconds=300)
 
-
-cache = ExpiringCache()

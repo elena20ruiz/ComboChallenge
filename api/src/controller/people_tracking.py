@@ -1,7 +1,8 @@
-from src.helper import log
 from datetime import datetime
-from src.controller.ctrl_cache import cache
-from src.controller.ctrl_session import CT
+
+from src.helper import log
+from src.controller.ctrl_models import cache, session
+
 
 def calculateDistance(x1,y1,x2,y2):  
      dist = math.sqrt((x2 - x1)**2 + (y2 - y1)**2)  
@@ -28,22 +29,22 @@ def track_new_frame(cam_id, new_people):
     actual_time =  datetime.now()
 
     for p in new_people:
-        if not CT.check_value(p):
+        if not session.check_value(p):
             t = [0 ,actual_time]
-            CT.update_value(p, t)
+            session.update_value(p, t)
         else:
-            value = CT.get_value(p)
+            value = session.get_value(p)
             last_diff = (actual_time - value[1]).total_seconds()
             t = [value[0] + last_diff, actual_time]
-            CT.update_value(p, t)
+            session.update_value(p, t)
 
     ini = len(new_people)
-    fi = CT.get_all_keys()
+    fi = session.get_all_keys()
     for p in range(ini,fi):
-        v = CT.get_value(p)
+        v = session.get_value(p)
         diff_sec = (actual_time - v[1]).total_seconds()
         if diff_sec >= 3:
-            CT.remove_key(p)
+            session.remove_key(p)
     
-    CT.print()
+    session.print()
     return result
