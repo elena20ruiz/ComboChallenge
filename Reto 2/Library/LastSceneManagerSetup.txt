@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/GoogleARCore/Examples/HelloAR/Scenes/HelloAR.unity
+- path: Assets/GoogleARCore/Examples/HelloAR/Scenes/Reto 2.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
