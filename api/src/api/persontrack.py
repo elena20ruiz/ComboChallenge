@@ -3,7 +3,8 @@
 from flask import jsonify, request
 import os
 import subprocess
-import threading, time
+import threading
+import time
 from multiprocessing import Process
 
 # Global variables
@@ -12,15 +13,18 @@ from src.controller import screen
 
 THREADS = []
 
+
 def start():
     log.info('Start capturing the people')
     try:
-        process = Process(target=screen.run)
+        # Number of lists
+        list = os.listdir(os.getcwd() +'/src/data/output/') 
+        number_files = len(list)
+        process = Process(target=screen.run, args=(number_files+1,))
         process.start()
-        log.info(process)
         THREADS.append(process)
-        return response.make(False, response={0: 'Running'})
-    
+        return response.make(False, response={'screen_id': number_files+1})
+
     except Exception as e:
         log.error('ERROR while recording')
         log.error(e)

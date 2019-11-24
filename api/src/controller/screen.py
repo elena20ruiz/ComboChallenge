@@ -5,6 +5,7 @@ import time
 import numpy as np
 import sys
 import json
+from datetime import datetime
 from darkflow.net.build import TFNet
 
 
@@ -48,7 +49,7 @@ def track_results(results, colors, frame):
         
 
 
-def run():
+def run(id):
     # VIDEO CONNECTION --------------
     log.info('Start loading model ...')
     # Load model
@@ -63,7 +64,7 @@ def run():
     capture.set(cv2.CAP_PROP_FRAME_WIDTH, 1920)
     capture.set(cv2.CAP_PROP_FRAME_HEIGHT, 1080)
 
-    file_name = 'test_1.txt'
+    file_name = f'test_{id}.txt'
 
     colors = [tuple(255 * np.random.rand(3)) for _ in range(10)]
     i = 0
@@ -79,9 +80,14 @@ def run():
             print('FPS {:.1f}'.format(1 / (time.time() - start_time)))
             
             # Save tracking
+            res = {
+                'time': datetime.now().strftime("%H:%M:%S"),
+                'people': output['people']
+            }
             with open(f'src/data/output/{file_name}', "a+") as f:
-                f.write(str(output['people']))
+                f.write(str(res))
                 f.write('\n')
+            time.sleep(WAIT_TIME)
         i += 1
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break

@@ -6,4 +6,3 @@ Cython
 numpy
 tensorflow
 opencv-python
-multiprocessing
