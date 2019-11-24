@@ -12,39 +12,62 @@ from darkflow.net.build import TFNet
 from src.helper import log
 from src import *
 
+from src.controller import people_tracking as p
+from src.controller.ctrl_cache import cache
+
 
 def calculate_center(x,y,x2,y2):
     return ((x+x2)/2 , (y+y2)/2)
 
 def track_results(results, colors, frame):
-    people = []
     log.info('New frame: ----------------')
-    for color, result in zip(colors, results):
-        if result['label'] == 'person':
+    new_people = {}
+    i = 0
+    for result in results:
+        # 1. Get info
+        x = result['topleft']['x']
+        y = result['topleft']['y']
 
-            x = result['topleft']['x']
-            y = result['topleft']['y']
+        x2 = result['bottomright']['x']
+        y2 = result['bottomright']['y']
 
-            x2 = result['bottomright']['x']
-            y2 = result['bottomright']['y']
+        # 2. Calculate centroid
+        centroid = calculate_center(x,y,x2,y2)
 
+        # 3. Add to new frame dictionary
+        new_people[i] = {
+            'centroid': centroid,
+            'x': x,
+            'y': y,
+            'x2': x2,
+            'y2': y2
+        }
+        i += 1
+
+    results = p.track_new_frame(DEVICE_ID, new_people)
+
+
+    for color, i in zip(colors, results):
+
+            x = results[i]['x']
+            y = results[i]['y']
+
+            x2 = results[i]['x2']
+            y2 = results[i]['y2']
+
+            centroid = results[i]['centroid']
             tl = (x,y)
             br = (x2,y2)
-            
-            (centerx , centery) = calculate_center(x,y,x2,y2)
-            people.append({
-                'cx': centerx,
-                'cy': centery
-            })
+
             confidence = result['confidence']
-            text = '{}: {:.0f}%'.format('person', confidence * 100)
-            log.info(f'person {centerx}, {centery}')
+            # 01. Calculate center 
+            text = '{}_{}: {:.0f}%'.format('person', i, confidence * 100)
             frame = cv2.rectangle(frame, tl, br, color, 5)
             frame = cv2.putText(
                 frame, text, tl, cv2.FONT_HERSHEY_COMPLEX, 1, (0, 0, 0), 2)
     return {
         'frame': frame,
-        'people': people
+        'people': new_people
     }
         
 
@@ -58,6 +81,9 @@ def run(id):
         'load': WEIGHTS_PATH.format(model=MODEL_NAME),
         'threshold': MODEL_THRESHOLD
     })
+
+    ## tracker
+
     # Open camera connection
     log.info('Open the camera device ...')
     capture = cv2.VideoCapture(DEVICE_ID)
@@ -87,7 +113,6 @@ def run(id):
             with open(f'src/data/output/{file_name}', "a+") as f:
                 f.write(str(res))
                 f.write('\n')
-            time.sleep(WAIT_TIME)
         i += 1
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
