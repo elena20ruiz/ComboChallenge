@@ -36,6 +36,28 @@ paths:
               schema:
                 type: string
                 description: Error description. 
+
+  /stop:
+    post:
+      tags:
+        - control
+      summary: Stop video to control person movements
+      description: Invoke this endpoint to stop the gran hermano main feature
+      operationId: src.api.persontrack.stop
+      responses:
+        200:
+          description: Standard GranHermano API JSON response. You should check the `error` attribute to determine if there was an error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIResponse'
+        default:
+          description: Unexpected error.
+          content:
+            application/text:
+              schema:
+                type: string
+                description: Error description. 
   /summary:
     get:
       tags:
