@@ -1,0 +1,64 @@
+{
+    "sala_1": {
+        "persona_1": [
+            {
+                "ini": "hh:mm:ss",
+                "fi": "hh:mm:ss"
+            },
+            {
+                "ini": "hh:mm:ss",
+                "fi": "hh:mm:ss"
+            },
+            {
+                "ini": "hh:mm:ss",
+                "fi": "hh:mm:ss"
+            }
+        ],
+        "persona_2": [
+            {
+                "ini": "hh:mm:ss",
+                "fi": "hh:mm:ss"
+            }
+        ],
+        "persona_3": [
+            {
+                "ini": "hh:mm:ss",
+                "fi": "hh:mm:ss"
+            }
+        ]
+    },
+    "sala_2": {
+        "persona_2": [
+            {
+                "ini": "hh:mm:ss",
+                "fi": "hh:mm:ss"
+            }
+        ],
+        "persona_3": [
+            {
+                "ini": "hh:mm:ss",
+                "fi": "hh:mm:ss"
+            },
+            {
+                "ini": "hh:mm:ss",
+                "fi": "hh:mm:ss"
+            }
+        ]
+    },
+    "sala_3": {
+        "persona_3": [
+            {
+                "ini": "hh:mm:ss",
+                "fi": "hh:mm:ss"
+            },
+            {
+                "ini": "hh:mm:ss",
+                "fi": "hh:mm:ss"
+            },
+            {
+                "ini": "hh:mm:ss",
+                "fi": "hh:mm:ss"
+            }
+        ]
+    }
+}

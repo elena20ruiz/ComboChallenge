@@ -117,3 +117,5 @@ dmypy.json
 
 # Data
 !data/.gitkeep
+
+./cfg/*
