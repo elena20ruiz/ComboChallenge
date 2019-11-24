@@ -1,0 +1,16 @@
+{
+    "person_1": {
+        "sala_1": {
+            "person_2": [{
+                "ini": "hh:mm:ss",
+                "fi": "hh:mm:ss"
+            }],
+            "person_3": [{
+                "ini": "hh:mm:ss",
+                "fi": "hh:mm:ss"
+            }]
+        },
+        "sala_2": {},
+        "sala_3": {}
+    }
+}
