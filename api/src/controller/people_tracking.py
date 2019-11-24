@@ -12,7 +12,7 @@ def calculateDistance(x1,y1,x2,y2):
 def redistribute_people(lpeople, new_people):
     return
 
-def track_new_frame(cam_id, new_people):
+def track_new_frame(cam_id, new_people, id):
     log.debug('Comparing two following frames ... ')
 
     # Check if exists last frame
@@ -43,7 +43,12 @@ def track_new_frame(cam_id, new_people):
     for p in range(ini,fi):
         v = session.get_value(p)
         diff_sec = (actual_time - v[1]).total_seconds()
-        if diff_sec >= 3:
+        if diff_sec >= 1.5:
+            with open(f'src/data/summary_output/people_movement_{id}.txt', 'a+') as f:
+                text = f'{actual_time.strftime("%H:%M:%S")} - Person {p} left the room after {diff_sec} seconds.'
+                print(text)
+                f.write(text)
+                f.write('\n')
             session.remove_key(p)
     
     session.print()

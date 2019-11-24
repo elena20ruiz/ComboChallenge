@@ -25,7 +25,7 @@ Return:
  - frame: Frame to print
  - people: Detected people with its centroids
 """
-def run(results, colors, frame):
+def run(results, colors, frame, id):
     log.info('New frame output:')
     new_people = {}
     i = 0
@@ -53,7 +53,7 @@ def run(results, colors, frame):
         }
         i += 1
 
-    results = p.track_new_frame(DEVICE_ID, new_people)
+    results = p.track_new_frame(DEVICE_ID, new_people, id)
 
 
     for color, i in zip(colors, results):

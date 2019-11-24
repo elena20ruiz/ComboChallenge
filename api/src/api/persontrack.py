@@ -18,7 +18,7 @@ def start():
     log.info('Start capturing the people')
     try:
         # Number of lists
-        list = os.listdir(os.getcwd() +'/src/data/output/') 
+        list = os.listdir(os.getcwd() +'/src/data/tracking_output/') 
         number_files = len(list)
         running_app.start()
         process = Process(target=screen.run, args=(number_files+1,))

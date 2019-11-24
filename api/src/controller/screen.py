@@ -47,7 +47,7 @@ def run(id):
             results = tf_net.return_predict(frame)
 
             log.info('Frame processing - Interpretating prediction')
-            output = frame_process.run(results, colors, frame)   
+            output = frame_process.run(results, colors, frame, id)   
 
             # Show frame       
             cv2.imshow('frame', output['frame'])
@@ -57,7 +57,7 @@ def run(id):
                 'time': datetime.now().strftime("%H:%M:%S"),
                 'people': output['people']
             }
-            with open(f'src/data/output/{file_name}', "a+") as f:
+            with open(f'src/data/tracking_output/{file_name}', "a+") as f:
                 f.write(str(res))
                 f.write('\n')
         i += 1
